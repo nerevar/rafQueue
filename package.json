@@ -1,0 +1,12 @@
+{
+  "name": "rafQueue",
+  "version": "0.1.0",
+  "description": "Library for stretching heavy js operations in time using request Animation Frame",
+  "author": "Roman Rybalchenko (nerevar) <nerevar@yandex-team.ru>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nerevar/rafQueue.git"
+  }
+}
+
