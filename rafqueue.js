@@ -1,19 +1,21 @@
-/**
- * requestAnimationFrame polyfill from Paul Irish
- * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
- * MIT license
- */
 (function() {
 
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    /**
+     * requestAnimationFrame polyfill from Paul Irish
+     * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+     * MIT license
+     */
+    var lastTime = 0,
+        vendors = ['ms', 'moz', 'webkit', 'o'];
 
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
+            || window[vendors[x] + 'CancelRequestAnimationFrame'];
     }
 
     if (!window.requestAnimationFrame) {
+        // Polyfill for IE8-9, Android <= 4.3
         window.requestAnimationFrame = function(fn) {
 
             var currTime = +(new Date()),
@@ -36,25 +38,20 @@
     }
 
     /**
-     *  Обёртка для последовательного выполнения функций по очереди
-     *  в разных кадрах отрисовки с помощью requestAnimationFrame
-     *
-     *  Пример использования:
-     *  <script>
-     *      var rafQ = new window.rafQueue();
-     *      rafQ
-     *          .add(function() { console.log('i'll execute in next frame'); })
-     *          .add(function() { console.log('i'll execute in frame after next frame with ctx:', this); }, this)
-     *          .run();
-     *  </script>>
+     * A wrapper for the consequentially execution heavy js functions using requestAnimationFrame
      */
     window.rafQueue = function() {
+
+        /**
+         * Container for callbacks with their's context
+         * @type {Array}
+         */
         var stack = [];
 
         /**
-         * Добавляет шаг в очередной requestAnimationFrame
-         * @param {Function} fn - функция, которую нужно вызвать
-         * @param {Object} [ctx] - контекст выполнения функции
+         * Add callback with ctx to stack
+         * @param {Function} fn - callback
+         * @param {Object} [ctx] - context
          * @returns {Object} *
          */
         this.add = function(fn, ctx) {
@@ -63,16 +60,16 @@
         };
 
         /**
-         * Последовательно запускает функции через raf
+         * Consequentially runs all callbacks from stack
          */
         this.run = function() {
 
             var raf = window.requestAnimationFrame,
                 runner,
-                // рекурсивно вызывает сама себя + создаёт новый frame
+                // runs callback + recursively calls itself in next frame
                 onNextFrame = function() {
+
                     if (stack.length === 0) {
-                        // выполнили всё что можно
                         return;
                     }
 
@@ -84,12 +81,16 @@
                     }
 
                     raf(onNextFrame);
+
                 };
 
-            // первый запуск. Запускаем "через один" raf
-            raf(function() { raf(onNextFrame); });
+            // first run. Run through one frame
+            raf(function() {
+                raf(onNextFrame);
+            });
 
         };
+
     };
 
 }());
