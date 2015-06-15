@@ -26,29 +26,138 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
-                <article>
-                    <header>
-                        <h1>article header h1</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec.</p>
-                    </header>
-                    <section>
-                        <h2>article section h2</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                    </section>
-                    <section>
-                        <h2>article section h2</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                    </section>
-                    <footer>
-                        <h3>article footer h3</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor.</p>
-                    </footer>
-                </article>
+                <div class="clearfix">
+                    <article>
+                        <section>
+                            <h2>Одновременное выполнение кода</h2>
+                            <button class="button button__serial">Regular</button>
+                            <button class="button button__stop">STOP</button>
+                        </section>
+                        <section>
+                            <h2>rafQueue выполнение кода</h2>
+                            <button class="button button__raf">Raf</button>
+                        </section>
 
-                <aside>
-                    <h3>aside</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices.</p>
-                </aside>
+                        <hr/ >
+
+                        <section>
+                            <span id="rate">777 FPS</span>
+
+                            <div class="bar">
+                                <div class="circle"></div>
+                            </div>
+                        </section>
+                    </article>
+
+                    <aside>
+                        <h3>aside</h3>
+                        <label>
+                            <input type="radio" name="scrollKind" value="default" class="scrollKind" checked>
+                            Обычный скролл
+                        </label>
+                        <br />
+                        <label>
+                            <input type="radio" name="scrollKind" value="raf" class="scrollKind">
+                            rafQueue
+                        </label>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapib us velit suscipit ultrices.</p>
+                    </aside>
+                </div>
+
+                <section class="images">
+                    <img src="img/thumbs/115b41285301a3b1b3ea2574def9f730.jpg" class="preview" />
+                    <img src="img/thumbs/23165b1c2bbb22486eac1aa2060a0e76.jpg" class="preview" />
+                    <img src="img/thumbs/238dbf25cde530fd99b8d5bb9d9645f1.jpg" class="preview" />
+                    <img src="img/thumbs/30f030934639b2f5e80facb0a269cd5f.jpg" class="preview" />
+                    <img src="img/thumbs/41050d8430eaa65f40ac59cbc3c6ac1a.jpg" class="preview" />
+                    <img src="img/thumbs/4279d04ed0aceb690fcd7f58f212db13.jpg" class="preview" />
+                    <img src="img/thumbs/4acd207e2adfd02960d281874564fd5c.jpg" class="preview" />
+                    <img src="img/thumbs/570b51df54f36e8b1e688152767edd7e.jpg" class="preview" />
+                    <img src="img/thumbs/599ae16e74623623c201876f83b5b0a1.jpg" class="preview" />
+                    <img src="img/thumbs/60e2e283748a7a7ac41ea4f3384f07a3.jpg" class="preview" />
+                    <img src="img/thumbs/61de437676551a680d429ad7dc7505c0.jpg" class="preview" />
+                    <img src="img/thumbs/63c0f6480c57da8f9b56237ed916e739.jpg" class="preview" />
+                    <img src="img/thumbs/69df14b32ce6e216a2fa2cd71629c188.jpg" class="preview" />
+                    <img src="img/thumbs/6ece02426ecd74f561c1616f7a82a8f8.jpg" class="preview" />
+                    <img src="img/thumbs/725417424e60623fd4ea76c4613d641b.jpg" class="preview" />
+                    <img src="img/thumbs/8e53c72244d0a5a34df2dee8a4aaa051.jpg" class="preview" />
+                    <img src="img/thumbs/956ca0f91a64c3aeb6e1da4b60ff5614.jpg" class="preview" />
+                    <img src="img/thumbs/961c38a88c331d70eb1408b62dde7fec.jpg" class="preview" />
+                    <img src="img/thumbs/a28fd2feb56935f5bf1c2b6b25205b08.jpg" class="preview" />
+                    <img src="img/thumbs/a566999e98da6a7554c84e178b6862d5.jpg" class="preview" />
+                    <img src="img/thumbs/aaf51cda2aa50649b91583b0f346805d.jpg" class="preview" />
+                    <img src="img/thumbs/b2d743945bfdbcdfff855204688f0b77.jpg" class="preview" />
+                    <img src="img/thumbs/b936d7c3a95dae40bee7d03de1130742.jpg" class="preview" />
+                    <img src="img/thumbs/baf70dc0448500d72754a6b90919a2b9.jpg" class="preview" />
+                    <img src="img/thumbs/bd9cd39e986b7b709b38818e77d3685f.jpg" class="preview" />
+                    <img src="img/thumbs/c7c71e9d4c52646cdcfdf93a9be4ee68.jpg" class="preview" />
+                    <img src="img/thumbs/d458126c09f98b3c5f572125ffed5bde.jpg" class="preview" />
+                    <img src="img/thumbs/df5c4aacd56f3623288dafe3ca2587b5.jpg" class="preview" />
+                    <img src="img/thumbs/e5dc8ae54acf926f2187891f7919a6ae.jpg" class="preview" />
+                    <img src="img/thumbs/ec66dd35ce49f697cebbb63524b26e14.jpg" class="preview" />
+
+                    <img src="img/thumbs/115b41285301a3b1b3ea2574def9f730.jpg" class="preview" />
+                    <img src="img/thumbs/23165b1c2bbb22486eac1aa2060a0e76.jpg" class="preview" />
+                    <img src="img/thumbs/238dbf25cde530fd99b8d5bb9d9645f1.jpg" class="preview" />
+                    <img src="img/thumbs/30f030934639b2f5e80facb0a269cd5f.jpg" class="preview" />
+                    <img src="img/thumbs/41050d8430eaa65f40ac59cbc3c6ac1a.jpg" class="preview" />
+                    <img src="img/thumbs/4279d04ed0aceb690fcd7f58f212db13.jpg" class="preview" />
+                    <img src="img/thumbs/4acd207e2adfd02960d281874564fd5c.jpg" class="preview" />
+                    <img src="img/thumbs/570b51df54f36e8b1e688152767edd7e.jpg" class="preview" />
+                    <img src="img/thumbs/599ae16e74623623c201876f83b5b0a1.jpg" class="preview" />
+                    <img src="img/thumbs/60e2e283748a7a7ac41ea4f3384f07a3.jpg" class="preview" />
+                    <img src="img/thumbs/61de437676551a680d429ad7dc7505c0.jpg" class="preview" />
+                    <img src="img/thumbs/63c0f6480c57da8f9b56237ed916e739.jpg" class="preview" />
+                    <img src="img/thumbs/69df14b32ce6e216a2fa2cd71629c188.jpg" class="preview" />
+                    <img src="img/thumbs/6ece02426ecd74f561c1616f7a82a8f8.jpg" class="preview" />
+                    <img src="img/thumbs/725417424e60623fd4ea76c4613d641b.jpg" class="preview" />
+                    <img src="img/thumbs/8e53c72244d0a5a34df2dee8a4aaa051.jpg" class="preview" />
+                    <img src="img/thumbs/956ca0f91a64c3aeb6e1da4b60ff5614.jpg" class="preview" />
+                    <img src="img/thumbs/961c38a88c331d70eb1408b62dde7fec.jpg" class="preview" />
+                    <img src="img/thumbs/a28fd2feb56935f5bf1c2b6b25205b08.jpg" class="preview" />
+                    <img src="img/thumbs/a566999e98da6a7554c84e178b6862d5.jpg" class="preview" />
+                    <img src="img/thumbs/aaf51cda2aa50649b91583b0f346805d.jpg" class="preview" />
+                    <img src="img/thumbs/b2d743945bfdbcdfff855204688f0b77.jpg" class="preview" />
+                    <img src="img/thumbs/b936d7c3a95dae40bee7d03de1130742.jpg" class="preview" />
+                    <img src="img/thumbs/baf70dc0448500d72754a6b90919a2b9.jpg" class="preview" />
+                    <img src="img/thumbs/bd9cd39e986b7b709b38818e77d3685f.jpg" class="preview" />
+                    <img src="img/thumbs/c7c71e9d4c52646cdcfdf93a9be4ee68.jpg" class="preview" />
+                    <img src="img/thumbs/d458126c09f98b3c5f572125ffed5bde.jpg" class="preview" />
+                    <img src="img/thumbs/df5c4aacd56f3623288dafe3ca2587b5.jpg" class="preview" />
+                    <img src="img/thumbs/e5dc8ae54acf926f2187891f7919a6ae.jpg" class="preview" />
+                    <img src="img/thumbs/ec66dd35ce49f697cebbb63524b26e14.jpg" class="preview" />
+
+                    <img src="img/thumbs/115b41285301a3b1b3ea2574def9f730.jpg" class="preview" />
+                    <img src="img/thumbs/23165b1c2bbb22486eac1aa2060a0e76.jpg" class="preview" />
+                    <img src="img/thumbs/238dbf25cde530fd99b8d5bb9d9645f1.jpg" class="preview" />
+                    <img src="img/thumbs/30f030934639b2f5e80facb0a269cd5f.jpg" class="preview" />
+                    <img src="img/thumbs/41050d8430eaa65f40ac59cbc3c6ac1a.jpg" class="preview" />
+                    <img src="img/thumbs/4279d04ed0aceb690fcd7f58f212db13.jpg" class="preview" />
+                    <img src="img/thumbs/4acd207e2adfd02960d281874564fd5c.jpg" class="preview" />
+                    <img src="img/thumbs/570b51df54f36e8b1e688152767edd7e.jpg" class="preview" />
+                    <img src="img/thumbs/599ae16e74623623c201876f83b5b0a1.jpg" class="preview" />
+                    <img src="img/thumbs/60e2e283748a7a7ac41ea4f3384f07a3.jpg" class="preview" />
+                    <img src="img/thumbs/61de437676551a680d429ad7dc7505c0.jpg" class="preview" />
+                    <img src="img/thumbs/63c0f6480c57da8f9b56237ed916e739.jpg" class="preview" />
+                    <img src="img/thumbs/69df14b32ce6e216a2fa2cd71629c188.jpg" class="preview" />
+                    <img src="img/thumbs/6ece02426ecd74f561c1616f7a82a8f8.jpg" class="preview" />
+                    <img src="img/thumbs/725417424e60623fd4ea76c4613d641b.jpg" class="preview" />
+                    <img src="img/thumbs/8e53c72244d0a5a34df2dee8a4aaa051.jpg" class="preview" />
+                    <img src="img/thumbs/956ca0f91a64c3aeb6e1da4b60ff5614.jpg" class="preview" />
+                    <img src="img/thumbs/961c38a88c331d70eb1408b62dde7fec.jpg" class="preview" />
+                    <img src="img/thumbs/a28fd2feb56935f5bf1c2b6b25205b08.jpg" class="preview" />
+                    <img src="img/thumbs/a566999e98da6a7554c84e178b6862d5.jpg" class="preview" />
+                    <img src="img/thumbs/aaf51cda2aa50649b91583b0f346805d.jpg" class="preview" />
+                    <img src="img/thumbs/b2d743945bfdbcdfff855204688f0b77.jpg" class="preview" />
+                    <img src="img/thumbs/b936d7c3a95dae40bee7d03de1130742.jpg" class="preview" />
+                    <img src="img/thumbs/baf70dc0448500d72754a6b90919a2b9.jpg" class="preview" />
+                    <img src="img/thumbs/bd9cd39e986b7b709b38818e77d3685f.jpg" class="preview" />
+                    <img src="img/thumbs/c7c71e9d4c52646cdcfdf93a9be4ee68.jpg" class="preview" />
+                    <img src="img/thumbs/d458126c09f98b3c5f572125ffed5bde.jpg" class="preview" />
+                    <img src="img/thumbs/df5c4aacd56f3623288dafe3ca2587b5.jpg" class="preview" />
+                    <img src="img/thumbs/e5dc8ae54acf926f2187891f7919a6ae.jpg" class="preview" />
+                    <img src="img/thumbs/ec66dd35ce49f697cebbb63524b26e14.jpg" class="preview" />
+                </section>
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
@@ -60,6 +169,9 @@
         </div>
 
         <script src="js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="js/vendor/jquery.ba-throttle-debounce.min.js"></script>
+        <script src="js/rafqueue.js"></script>
+        <script src="js/FpsMeter.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

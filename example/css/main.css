@@ -80,44 +80,13 @@ body {
 
 .header-container,
 .footer-container,
-.main aside {
+.main aside
+{
     background: #f16529;
 }
 
 .title {
     color: white;
-}
-
-/* ==============
-    MOBILE: Menu
-   ============== */
-
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-nav a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 15px 0;
-
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-
-    color: white;
-    background: #e44d26;
-}
-
-nav a:hover,
-nav a:visited {
-    color: white;
-}
-
-nav a:hover {
-    text-decoration: underline;
 }
 
 /* ==============
@@ -130,11 +99,6 @@ nav a:hover {
 
 .main article h1 {
     font-size: 2em;
-}
-
-.main aside {
-    color: white;
-    padding: 0px 5% 10px;
 }
 
 .footer-container footer {
@@ -151,91 +115,20 @@ nav a:hover {
 }
 
 /* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
    Media Queries
    ========================================================================== */
 
-@media only screen and (min-width: 480px) {
-
-/* ====================
-    INTERMEDIATE: Menu
-   ==================== */
-
-    nav a {
-        float: left;
-        width: 27%;
-        margin: 0 1.7%;
-        padding: 25px 2%;
-        margin-bottom: 0;
-    }
-
-    nav li:first-child a {
-        margin-left: 0;
-    }
-
-    nav li:last-child a {
-        margin-right: 0;
-    }
-
-/* ========================
-    INTERMEDIATE: IE Fixes
-   ======================== */
-
-    nav ul li {
-        display: inline;
-    }
-
-    .oldie nav a {
-        margin: 0 0.7%;
-    }
-}
-
 @media only screen and (min-width: 768px) {
 
-/* ====================
-    WIDE: CSS3 Effects
-   ==================== */
-
+    /* ====================
+        WIDE: CSS3 Effects
+       ==================== */
     .header-container,
     .main aside {
         -webkit-box-shadow: 0 5px 10px #aaa;
-           -moz-box-shadow: 0 5px 10px #aaa;
-                box-shadow: 0 5px 10px #aaa;
+        -moz-box-shadow: 0 5px 10px #aaa;
+        box-shadow: 0 5px 10px #aaa;
     }
-
-/* ============
-    WIDE: Menu
-   ============ */
-
-    .title {
-        float: left;
-    }
-
-    nav {
-        float: right;
-        width: 38%;
-    }
-
-/* ============
-    WIDE: Main
-   ============ */
 
     .main article {
         float: left;
@@ -243,9 +136,13 @@ nav a:hover {
     }
 
     .main aside {
-        float: right;
-        width: 28%;
+        padding: 20px;
+        color: #fff;
+        position: fixed;
+        right: 100px;
+        width: 300px;
     }
+
 }
 
 @media only screen and (min-width: 1140px) {
@@ -308,66 +205,39 @@ nav a:hover {
     *zoom: 1;
 }
 
+
 /* ==========================================================================
-   Print styles
+   Author's custom styles
    ========================================================================== */
 
-@media print {
-    *,
-    *:before,
-    *:after {
-        background: transparent !important;
-        color: #000 !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
+.bar
+{
+    position: relative;
+    height: 100px;
 
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
+    border: 1px solid #ccc;
+}
 
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
+.circle
+{
+    position: absolute;
+    left: 0;
+    top: 0;
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+    width: 100px;
+    height: 100px;
 
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
+    background-color: #f16529;
+    border-radius: 50px;
+    border: 1px solid #e44d26;
+}
 
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
+.images
+{
+    margin-top: 40px;
+}
 
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
+.preview
+{
+    max-width: 200px;
 }
