@@ -1,4 +1,15 @@
-(function() {
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.rafQueue = factory();
+    }
+}(this, function () {
 
     /**
      * requestAnimationFrame polyfill from Paul Irish
@@ -40,7 +51,7 @@
     /**
      * A wrapper for the consequentially execution heavy js functions using requestAnimationFrame
      */
-    window.rafQueue = function() {
+    var rafQueue = function() {
 
         /**
          * Container for callbacks with their's context
@@ -93,4 +104,6 @@
 
     };
 
-}());
+    return rafQueue;
+
+}));
