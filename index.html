@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+
+
+<html lang="ru">
+<head>
+	<title>rafQueue — stretch heavy js operations in time</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="themes/yandex/styles/screen.css" />
+	<link rel="stylesheet" href="themes/yandex/styles/user.css" />
+	<!-- <link rel="stylesheet" href="themes/yandex/styles/prism-white.css" /> -->
+	<link rel="stylesheet" href="bower_components/prismjs/prism-twilight.css" />
+	
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>rafQueue — stretch heavy js operations in time</h1>
+		<p>Роман Рыбальченко (nerevar), <a href="http://yandex.ru/">Яндекс</a></p>
+
+	</header>
+
+	<section id="section" class="slide cover"><div><h2>Яндекс</h2>
+
+</div></section>
+<section class="slide shout" id="cover"><div><h2>rafQueue — stretch heavy js operations in time</h2>
+
+<div class="s">
+    <div class="service">Картинки</div>
+</div>
+
+<div class="info">
+	<p class="author">Роман Рыбальченко (nerevar)</p>
+</div>
+
+</div></section>
+<section class="slide cover h" id="picturesyandex-imagespng"><div><h2><img src="pictures/yandex-images.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosiepng"><div><h2><img src="pictures/rosie.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie2png"><div><h2><img src="pictures/rosie2.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie3png"><div><h2><img src="pictures/rosie3.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie4png"><div><h2><img src="pictures/rosie4.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie5png"><div><h2><img src="pictures/rosie5.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie6png"><div><h2><img src="pictures/rosie6.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosie7png"><div><h2><img src="pictures/rosie7.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturesrosiepng-1"><div><h2><img src="pictures/rosie.png" alt="" /></h2>
+
+</div></section>
+<section class="slide" id="settimeoutsetinterval"><div><h2>Анимация с setTimeout/setInterval</h2>
+<p class="h140"><img src="pictures/frames1.png" alt="" /></p>
+
+<pre><code class="language-javascript">function step() {
+    // alter dom, change styles
+    // ...
+    
+    // schedule next frame
+    setTimeout(step, 16.667);
+}
+step();
+</code></pre>
+
+</div></section>
+<section class="slide" id="settimeoutsetinterval-1"><div><h2>Анимация с setTimeout/setInterval</h2>
+<p class="h140"><img src="pictures/frames2.png" alt="" /></p>
+
+<pre><code class="language-javascript">function step() {
+    // alter dom, change styles
+    // ...
+    
+    // schedule next frame
+    setTimeout(step, 16.667);
+}
+step();
+</code></pre>
+
+</div></section>
+<section class="slide" id="section-1"><div><h2>Синхронизация анимации с кадрами</h2>
+<p class="h140"><img src="pictures/frames3.png" alt="" /></p>
+
+<pre><code class="language-javascript">function step() {
+    // alter dom, change styles
+    // ...
+    
+    // schedule next frame
+    requestAnimationFrame(step);
+}
+step();
+</code></pre>
+
+</div></section>
+<section class="slide" id="section-2"><div><h2>Синхронизация анимации с кадрами</h2>
+<p class="h140"><img src="pictures/frames4.png" alt="" /></p>
+
+<pre><code class="language-javascript">function step() {
+    // alter dom, change styles
+    // ...
+    
+    // schedule next frame
+    requestAnimationFrame(step);
+}
+step();
+</code></pre>
+
+</div></section>
+<section class="slide" id="requestanimationframe"><div><h2>requestAnimationFrame</h2>
+<ul>
+  <li>работает с частотой развёртки монитора
+    <ul>
+      <li>позволяет избежать выпавших кадров</li>
+    </ul>
+  </li>
+  <li>браузер может оптимизировать анимацию
+    <ul>
+      <li>анимация более плавная</li>
+    </ul>
+  </li>
+  <li>анимация в неактивной вкладке будет приостановлена
+    <ul>
+      <li>снижает нагрузку в фоне</li>
+    </ul>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide raf-code low" id="rafqueue"><div><h2>rafQueue</h2>
+<pre><code class="language-javascript">var queue = new window.rafQueue();
+
+queue
+    .add(function() { loadFirst(); })
+    .add(function() {
+        // add steps in other functions
+        queue
+            .add(function() {
+                animateSecond();
+            })
+            .add(function() {
+                animateSecondAgain();
+            });
+    })
+    .add(function() { this.runFourthInCtx(); }, this);
+
+queue.run();
+</code></pre>
+
+</div></section>
+<section class="slide cover h" id="picturesrosiepng-2"><div><h2><img src="pictures/rosie.png" alt="" /></h2>
+
+</div></section>
+<section class="slide low" id="section-3"><div><h2>Загрузка картинки последовательная</h2>
+
+<pre class="tall"><code class="language-javascript">function load(item) {
+    this
+        .updatePreview(item.image)
+        .selectGalleryItem(item.id)
+        .updateSnippet(item.snippet)
+        .updateDirect(item.snippet.text)
+        .loadRelated(item.relatedUrl)
+        .updateButtons(item.links);
+}
+</code></pre>
+
+</div></section>
+<section class="slide raf-code low" id="rafqueue-1"><div><h2>Загрузка картинки через rafQueue</h2>
+
+<pre><code class="language-javascript">var queue = new window.rafQueue();
+
+function load(item) {
+    var _this = this;
+
+    queue
+        .add(function() {
+            _this.updatePreview(item.image);
+        })
+        .add(function() {
+            _this.selectGalleryItem(item.id);
+        })
+        .add(function() {
+            _this.updateSnippet(queue, item.snippet);
+        })
+        ...
+
+    queue.run();
+}
+</code></pre>
+
+</div></section>
+<section class="slide cover h" id="picturestimeline1-1png"><div><h2><img src="pictures/timeline1-1.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturestimeline1-2png"><div><h2><img src="pictures/timeline1-2.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturestimeline2-1png"><div><h2><img src="pictures/timeline2-1.png" alt="" /></h2>
+
+</div></section>
+<section class="slide cover h" id="picturestimeline2-2png"><div><h2><img src="pictures/timeline2-2.png" alt="" /></h2>
+
+</div></section>
+<section class="slide center low image-center" id="httpsgithubcomnerevarrafqueuehttpsgithubcomnerevarrafqueue"><div><h2><a href="https://github.com/nerevar/rafQueue">https://github.com/nerevar/rafQueue</a></h2>
+
+<p><img src="pictures/github.png" alt="" /></p>
+
+</div></section>
+<section class="slide middle" id="section-4"><div><h2>Вопросы ?</h2>
+
+</div></section>
+<section class="slide shout" id="contacts"><div><h2>Контакты</h2>
+
+<div class="info">
+<p class="author">Роман Рыбальченко (nerevar)</p>
+    <p class="position"></p>
+
+    <div class="contacts">
+        <!-- <p class="contacts-left contacts-top phone">+7 (000) 000-00-00</p> -->
+        <p class="contacts-left mail">nerevar@yandex-team.ru</p>
+        <p class="contacts-right twitter">@nerevar1n</p>
+        <!-- <p class="contacts-right contacts-bottom vk">vk</p> -->
+        <!-- <p class="contacts-right facebook">facebook</p> -->
+    </div>
+</div>
+</div></section>
+
+	
+	<div class="progress"><div></div></div>
+	<script src="bower_components/shower-core/shower.min.js"></script>
+	<script src="bower_components/prismjs/prism.js"></script>
+	<!-- Copyright © 2015 Роман Рыбальченко (nerevar), Яндекс — http://yandex.ru/ -->
+</body>
+</html>

@@ -1,0 +1,53 @@
+.h130 img
+{
+	height: 130px;
+}
+
+.h140 img
+{
+	height: 140px;
+}
+
+.h150 img
+{
+	height: 140px;
+}
+
+.tall code
+{
+	line-height: 2 !important;
+}
+
+.low h2
+{
+	margin-bottom: 40px;
+}
+
+.raf-code.slide pre[class*='language-']
+{
+	max-height: none;
+}
+
+.image-center img
+{
+	width: 100%;
+}
+
+.language-javascript .token.function
+{
+	color: #4FBFDA;
+}
+
+.language-javascript .token.punctuation
+{
+	color: #ccc;
+}
+
+.middle h2
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -115px;
+	margin-top: -30px;
+}
