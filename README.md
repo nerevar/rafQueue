@@ -1,6 +1,8 @@
 # rafQueue
 Library for stretching heavy js operations in time using request Animation Frame
 
+Presentation: http://nerevar.github.io/rafQueue/
+
 Example:
 
 ```html
