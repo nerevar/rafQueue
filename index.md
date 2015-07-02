@@ -46,6 +46,7 @@ title: rafQueue — stretch heavy js operations in time
 {:.cover .h}
 
 ## Анимация с setTimeout/setInterval
+{:.m0}
 ![](pictures/frames1.png)
 {:.h140}
 
@@ -61,6 +62,7 @@ step();
 ~~~
 
 ## Анимация с setTimeout/setInterval
+{:.m0}
 ![](pictures/frames2.png)
 {:.h140}
 
@@ -75,7 +77,8 @@ function step() {
 step();
 ~~~
 
-## Синхронизация анимации с кадрами
+## Анимация с requestAnimationFrame
+{:.m0}
 ![](pictures/frames3.png)
 {:.h140}
 
@@ -90,7 +93,8 @@ function step() {
 step();
 ~~~
 
-## Синхронизация анимации с кадрами
+## Анимация с requestAnimationFrame
+{:.m0}
 ![](pictures/frames4.png)
 {:.h140}
 
@@ -106,31 +110,25 @@ step();
 ~~~
 
 ## requestAnimationFrame
-* работает с частотой развёртки монитора 
+{:.bigger .m30}
+* работает с частотой обновления экрана
   * позволяет избежать выпавших кадров
 * браузер может оптимизировать анимацию
   * анимация более плавная
-* анимация в неактивной вкладке будет приостановлена
-  * снижает нагрузку в фоне
+* анимация в неактивной вкладке браузера будет приостановлена
+  * снижает нагрузку CPU в фоне
 
 ## rafQueue
-{:.raf-code .low}
+{:.code-36 .low}
 ~~~ javascript
 var queue = new window.rafQueue();
 
 queue
     .add(function() { loadFirst(); })
+    .add(function() { animateSecond(); })
     .add(function() {
-        // add steps in other functions
-        queue
-            .add(function() {
-                animateSecond();
-            })
-            .add(function() {
-                animateSecondAgain();
-            });
-    })
-    .add(function() { this.runFourthInCtx(); }, this);
+        this.runThirdInCtx();
+    }, this);
 
 queue.run();
 ~~~
@@ -138,45 +136,36 @@ queue.run();
 ## ![](pictures/rosie.png)
 {:.cover .h}
 
-
 ## Загрузка картинки последовательная
-{:.low}
+{:.code-30 .m30}
 
 ~~~ javascript
 function load(item) {
     this
         .updatePreview(item.image)
         .selectGalleryItem(item.id)
-        .updateSnippet(item.snippet)
-        .updateDirect(item.snippet.text)
-        .loadRelated(item.relatedUrl)
-        .updateButtons(item.links);
+        .updateLinks(item.snippet)
+        .loadDirect(item.snippet.text)
+        ...
 }
 ~~~
 {:.tall}
 
 ## Загрузка картинки через rafQueue
-{:.raf-code .low}
+{:.raf-code .m30}
 
 ~~~ javascript
 var queue = new window.rafQueue();
 
 function load(item) {
-    var _this = this;
+ var _this = this;
+ queue
+  .add(function() { _this.updatePreview(item); })
+  .add(function() { _this.selectGalleryItem(item); })
+  .add(function() { _this.updateLinks(item); })
+  ...
 
-    queue
-        .add(function() {
-            _this.updatePreview(item.image);
-        })
-        .add(function() {
-            _this.selectGalleryItem(item.id);
-        })
-        .add(function() {
-            _this.updateSnippet(queue, item.snippet);
-        })
-        ...
-
-    queue.run();
+  queue.run();
 }
 ~~~
 
@@ -194,7 +183,7 @@ function load(item) {
 {:.cover .h}
 
 ## [https://github.com/nerevar/rafQueue](https://github.com/nerevar/rafQueue)
-{:.center .low .image-center}
+{:.center .bigger .image-center}
 
 ![](pictures/github.png)
 

@@ -60,7 +60,7 @@
 <section class="slide cover h" id="picturesrosiepng-1"><div><h2><img src="pictures/rosie.png" alt="" /></h2>
 
 </div></section>
-<section class="slide" id="settimeoutsetinterval"><div><h2>Анимация с setTimeout/setInterval</h2>
+<section class="slide m0" id="settimeoutsetinterval"><div><h2>Анимация с setTimeout/setInterval</h2>
 <p class="h140"><img src="pictures/frames1.png" alt="" /></p>
 
 <pre><code class="language-javascript">function step() {
@@ -74,7 +74,7 @@ step();
 </code></pre>
 
 </div></section>
-<section class="slide" id="settimeoutsetinterval-1"><div><h2>Анимация с setTimeout/setInterval</h2>
+<section class="slide m0" id="settimeoutsetinterval-1"><div><h2>Анимация с setTimeout/setInterval</h2>
 <p class="h140"><img src="pictures/frames2.png" alt="" /></p>
 
 <pre><code class="language-javascript">function step() {
@@ -88,7 +88,7 @@ step();
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-1"><div><h2>Синхронизация анимации с кадрами</h2>
+<section class="slide m0" id="requestanimationframe"><div><h2>Анимация с requestAnimationFrame</h2>
 <p class="h140"><img src="pictures/frames3.png" alt="" /></p>
 
 <pre><code class="language-javascript">function step() {
@@ -102,7 +102,7 @@ step();
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-2"><div><h2>Синхронизация анимации с кадрами</h2>
+<section class="slide m0" id="requestanimationframe-1"><div><h2>Анимация с requestAnimationFrame</h2>
 <p class="h140"><img src="pictures/frames4.png" alt="" /></p>
 
 <pre><code class="language-javascript">function step() {
@@ -116,9 +116,9 @@ step();
 </code></pre>
 
 </div></section>
-<section class="slide" id="requestanimationframe"><div><h2>requestAnimationFrame</h2>
+<section class="slide bigger m30" id="requestanimationframe-2"><div><h2>requestAnimationFrame</h2>
 <ul>
-  <li>работает с частотой развёртки монитора
+  <li>работает с частотой обновления экрана
     <ul>
       <li>позволяет избежать выпавших кадров</li>
     </ul>
@@ -128,30 +128,23 @@ step();
       <li>анимация более плавная</li>
     </ul>
   </li>
-  <li>анимация в неактивной вкладке будет приостановлена
+  <li>анимация в неактивной вкладке браузера будет приостановлена
     <ul>
-      <li>снижает нагрузку в фоне</li>
+      <li>снижает нагрузку CPU в фоне</li>
     </ul>
   </li>
 </ul>
 
 </div></section>
-<section class="slide raf-code low" id="rafqueue"><div><h2>rafQueue</h2>
+<section class="slide code-36 low" id="rafqueue"><div><h2>rafQueue</h2>
 <pre><code class="language-javascript">var queue = new window.rafQueue();
 
 queue
     .add(function() { loadFirst(); })
+    .add(function() { animateSecond(); })
     .add(function() {
-        // add steps in other functions
-        queue
-            .add(function() {
-                animateSecond();
-            })
-            .add(function() {
-                animateSecondAgain();
-            });
-    })
-    .add(function() { this.runFourthInCtx(); }, this);
+        this.runThirdInCtx();
+    }, this);
 
 queue.run();
 </code></pre>
@@ -160,40 +153,32 @@ queue.run();
 <section class="slide cover h" id="picturesrosiepng-2"><div><h2><img src="pictures/rosie.png" alt="" /></h2>
 
 </div></section>
-<section class="slide low" id="section-3"><div><h2>Загрузка картинки последовательная</h2>
+<section class="slide code-30 m30" id="section-1"><div><h2>Загрузка картинки последовательная</h2>
 
 <pre class="tall"><code class="language-javascript">function load(item) {
     this
         .updatePreview(item.image)
         .selectGalleryItem(item.id)
-        .updateSnippet(item.snippet)
-        .updateDirect(item.snippet.text)
-        .loadRelated(item.relatedUrl)
-        .updateButtons(item.links);
+        .updateLinks(item.snippet)
+        .loadDirect(item.snippet.text)
+        ...
 }
 </code></pre>
 
 </div></section>
-<section class="slide raf-code low" id="rafqueue-1"><div><h2>Загрузка картинки через rafQueue</h2>
+<section class="slide raf-code m30" id="rafqueue-1"><div><h2>Загрузка картинки через rafQueue</h2>
 
 <pre><code class="language-javascript">var queue = new window.rafQueue();
 
 function load(item) {
-    var _this = this;
+ var _this = this;
+ queue
+  .add(function() { _this.updatePreview(item); })
+  .add(function() { _this.selectGalleryItem(item); })
+  .add(function() { _this.updateLinks(item); })
+  ...
 
-    queue
-        .add(function() {
-            _this.updatePreview(item.image);
-        })
-        .add(function() {
-            _this.selectGalleryItem(item.id);
-        })
-        .add(function() {
-            _this.updateSnippet(queue, item.snippet);
-        })
-        ...
-
-    queue.run();
+  queue.run();
 }
 </code></pre>
 
@@ -210,12 +195,12 @@ function load(item) {
 <section class="slide cover h" id="picturestimeline2-2png"><div><h2><img src="pictures/timeline2-2.png" alt="" /></h2>
 
 </div></section>
-<section class="slide center low image-center" id="httpsgithubcomnerevarrafqueuehttpsgithubcomnerevarrafqueue"><div><h2><a href="https://github.com/nerevar/rafQueue">https://github.com/nerevar/rafQueue</a></h2>
+<section class="slide center bigger image-center" id="httpsgithubcomnerevarrafqueuehttpsgithubcomnerevarrafqueue"><div><h2><a href="https://github.com/nerevar/rafQueue">https://github.com/nerevar/rafQueue</a></h2>
 
 <p><img src="pictures/github.png" alt="" /></p>
 
 </div></section>
-<section class="slide middle" id="section-4"><div><h2>Вопросы ?</h2>
+<section class="slide middle" id="section-2"><div><h2>Вопросы ?</h2>
 
 </div></section>
 <section class="slide shout" id="contacts"><div><h2>Контакты</h2>
